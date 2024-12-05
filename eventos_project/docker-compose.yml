@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: eventos_db
+    ports:
+      - "5433:5432"  # Cambia el puerto de PostgreSQL a 5433
+
+  web:
+    build: .
+    command: gunicorn --bind 0.0.0.0:8000 eventos_project.wsgi:application
+    volumes:
+      - .:/eventos_project  # Asegúrate de que el directorio de trabajo sea correcto
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://user:password@db:5432/eventos_db
