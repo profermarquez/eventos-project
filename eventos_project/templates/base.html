@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Eventos{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <header class="bg-white shadow p-4">
+        <h1 class="text-lg font-bold text-center">Gestión de Eventos</h1>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer class="bg-gray-200 text-center py-4">
+        <p class="text-sm text-gray-600">© 2024 Eventos. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

@@ -25,6 +25,8 @@ SECRET_KEY = 'django-insecure-3s08izn=e+6-p1!zmnfbd1=-%n-(w*1)zk_a3duxq(&9p3ht^a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+LOGIN_URL = '/login/'
+
 ALLOWED_HOSTS = []
 
 
@@ -36,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    
+    'django.contrib.staticfiles','autenticacion','eventos', 'autoridades','notificaciones',
 ]
 
 MIDDLEWARE = [
@@ -51,11 +54,15 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'eventos_project.urls'
 
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Incluye la carpeta global de plantillas
+        'APP_DIRS': True,  # Permite buscar en los templates/ de cada app si existieran
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -77,10 +84,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'eventos_db',
-        'USER': 'usuario',
-        'PASSWORD': 'contraseña',
-        'HOST': 'localhost',
-        'PORT': '5433',  # Cambiando el puerto por defecto
+        'USER': 'user',
+        'PASSWORD': 'password',
+        'HOST': 'db',  # Nombre del servicio del contenedor de la base de datos
+        'PORT': '5432',  # Puerto predeterminado de PostgreSQL dentro del contenedor
     }
 }
 
@@ -126,3 +133,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+#agregado
+AUTH_USER_MODEL = 'autenticacion.CustomUser'
+LOGIN_REDIRECT_URL = '/eventos'
+LOGOUT_REDIRECT_URL = '/'
+
+# Configura la duración de la sesión a una hora (3600 segundos)
+SESSION_COOKIE_AGE = 3600  # 1 hora
+
+# Forzar que la sesión expire cuando se cierre el navegador
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

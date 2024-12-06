@@ -3,21 +3,37 @@ version: '3.9'
 services:
   db:
     image: postgres:15
+    container_name: eventos_project_db
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: eventos_db
     ports:
-      - "5433:5432"  # Cambia el puerto de PostgreSQL a 5433
+      - "5433:5432"  # Cambia el puerto de PostgreSQL a 5433 en el host
+    volumes:
+      - pg_data:/var/lib/postgresql/data  # Persistir datos en un volumen
 
   web:
     build: .
-    command: gunicorn --bind 0.0.0.0:8000 eventos_project.wsgi:application
+    container_name: eventos_project_web
+    command: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
+             gunicorn --bind 0.0.0.0:8000 --timeout 120 eventos_project.wsgi:application"
     volumes:
-      - .:/eventos_project  # Asegúrate de que el directorio de trabajo sea correcto
+      - .:/eventos_project  # Asegúrate de que este directorio sea correcto
     ports:
       - "8000:8000"
     depends_on:
       - db
     environment:
       DATABASE_URL: postgres://user:password@db:5432/eventos_db
+      #DEBUG: 'True'  # Ajusta según el entorno
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  pg_data:
+    driver: local

@@ -1,0 +1,9 @@
+<!-- notificaciones/detalle_notificacion.html -->
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="text-xl font-bold mb-4">Detalle de Notificación</h2>
+<p><strong>Evento:</strong> {{ notificacion.evento.titulo }}</p>
+<p><strong>Autoridad:</strong> {{ notificacion.autoridad.nombre_completo }}</p>
+<p><strong>Estado:</strong> {{ notificacion.estado }}</p>
+<a href="{% url 'notificaciones:lista' %}" class="bg-blue-500 text-white px-4 py-2 rounded">Volver</a>
+{% endblock %}

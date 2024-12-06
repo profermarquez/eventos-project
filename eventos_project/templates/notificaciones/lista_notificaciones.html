@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="text-xl font-bold mb-4">Notificaciones</h2>
+<table class="table-auto w-full mt-4">
+    <thead>
+        <tr>
+            <th>Evento</th>
+            <th>Autoridad</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for notificacion in notificaciones %}
+        <tr>
+            <td>{{ notificacion.evento.titulo }}</td>
+            <td>{{ notificacion.autoridad.nombre_completo }}</td>
+            <td>{{ notificacion.estado }}</td>
+            <td>
+                <a href="{% url 'notificaciones:detalle' notificacion.id %}" class="text-blue-500">Detalles</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

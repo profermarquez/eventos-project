@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="text-xl font-bold mb-4">Autoridades</h2>
+<a href="{% url 'autoridades:crear' %}" class="bg-blue-500 text-white px-4 py-2 rounded">Crear Autoridad</a>
+<table class="table-auto w-full mt-4">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Cargo</th>
+            <th>Entidad</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for autoridad in autoridades %}
+        <tr>
+            <td>{{ autoridad.nombre_completo }}</td>
+            <td>{{ autoridad.cargo }}</td>
+            <td>{{ autoridad.entidad }}</td>
+            <td>
+                <a href="{% url 'autoridades:editar' autoridad.id %}" class="text-blue-500">Editar</a> |
+                <a href="{% url 'autoridades:eliminar' autoridad.id %}" class="text-red-500">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,6 +1,6 @@
-generar web con djando que se llame "eventos_project", y bd postgres (cambiar el puerto por defecto de la base de datos). La web debe ser atractiva y  facil de usar, generar los Dockerfile y docker-compose.yml
+generar web con django (las aplicaciones serian, autenticacion, autoridades, eventos,notificaciones y eventos_project) que se llame "eventos_project", y bd postgres (cambiar el puerto por defecto de la base de datos). La web debe ser atractiva y  facil de usar, generar los Dockerfile y docker-compose.yml 
 -modulo de autentificacion para el sitio, 
 -registro de eventos: titulo del evento, descripciòn / temàtica, fecha, horario y lugar
 -registro de autoridades(personas con un puesto y  una tematica): nombrecompleto, cargo, entidad a la que pertenece, campo de acciòn / tematicas, email, telèfono
 funcionalidad que permita hacer un matching entre la temàtica del evento y/o nombre del evento con la temàtica o campo de accciòn de la autoridad
--Funconalidad que envie notificaciones en base al matching (autoridades seleccionadas), y que tenga un log de acciones y  un registro de las notificaciones con estado (pendiente, enviado,error)
+-Funconalidad que envie notificaciones en base al matching (autoridades seleccionadas), y que tenga un log de acciones y  un registro de las notificaciones con estado (pendiente, enviado,error), de este problema descrito generame todos los templates de todas las vistas y con un diseño moderno con tailwind
